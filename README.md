@@ -1,4 +1,4 @@
-# QuizFlash: Digital Flashcard Manager
+# QuizFlash: Your Digital Flashcard Manager
 
 ![QuizFlash Logo](https://raw.githubusercontent.com/d-quint/QuizFlash/main/src/main/resources/title.png)
 
