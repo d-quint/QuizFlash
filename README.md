@@ -1,5 +1,7 @@
 # QuizFlash: Digital Flashcard Manager
 
+![QuizFlash Logo](https://raw.githubusercontent.com/d-quint/QuizFlash/main/src/main/resources/title.png)
+
 QuizFlash is a robust digital flashcard manager designed to streamline and enrich the learning process through flashcards.
 
 ## Download Instructions
