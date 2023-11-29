@@ -33,7 +33,8 @@ public class EditSet extends JPanel {
 
   JSplitPane info_table_pane = new JSplitPane(JSplitPane.HORIZONTAL_SPLIT);
 
-  JTable cards_table;
+  private static JTable cards_table;
+  
   DefaultTableModel cards_table_model;
   JScrollPane cards_table_pane;
   JScrollPane description_pane;
@@ -267,12 +268,14 @@ public class EditSet extends JPanel {
 
     // Set the grid lines to be visible and change the grid color
     cards_table.setShowGrid(true);
-    cards_table.setShowVerticalLines(true);
 
-    // Set the grid color to #ED4915
-    Color gridColor = Color.decode("#818181"); //apply grid for question bank visibility
+    // Set the grid color to be a dark gray
+    Color gridColor = Color.decode("#818181");
+    Color selectColor = Color.decode("#b3b3b3");
+    Color textColor = Color.decode("#000000");
     cards_table.setGridColor(gridColor);
-
+    cards_table.setSelectionBackground(selectColor);
+    cards_table.setSelectionForeground(textColor);
 
     // Add listeners to the table (check if a row is selected and edited, then get the new values and make a new card)
     cards_table.getModel().addTableModelListener(e -> {
@@ -311,5 +314,12 @@ public class EditSet extends JPanel {
     this.setBorder(editset_border);
     this.add(center_panel, BorderLayout.CENTER);
     this.add(button_panel, BorderLayout.SOUTH);
+  }
+
+  /**
+   * Returns the cards table.
+   */
+  public static JTable getTable() {
+    return cards_table;
   }
 }

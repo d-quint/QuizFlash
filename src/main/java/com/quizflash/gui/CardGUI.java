@@ -13,7 +13,7 @@ import com.quizflash.logic.*;
 /**
  * A panel that displays a flashcard.
  * It has two sides: the front and the back.
- * It is composed of a round rectangle with a JLabel in the center.
+ * It is composed of a white rectangle with a JLabel in the center.
  */
 public class CardGUI extends JPanel { 
   private Card card;
@@ -45,8 +45,7 @@ public class CardGUI extends JPanel {
     if (card == null) {
       return;
     }
-    //
-    //created font size auto adjustment for card
+
     // Calculate the font size based on the length of the text
     int defaultFontSize = 80;
     int fontSize = defaultFontSize;
@@ -56,19 +55,13 @@ public class CardGUI extends JPanel {
 
     int maxLength = Math.max(question.length(), answer.length());
 
-// Adjust the font size based on the length of the longer text
-    if (maxLength > 10 && maxLength <= 70) {
-      fontSize = (int) (defaultFontSize * 10.0 / maxLength);
-    }
+    // Do a map to calculate the font size based on the length of the text
+    // The longer the text (10 to 25 characters), the smaller the font size (60 px to 30 px)
+    fontSize = (int) map(maxLength, 10, 25, 60, 30);
 
-    else if (maxLength >70){
-      fontSize = 20;
-    }
-
-// Construct JLabels with the adjusted font size
-    JLabel front = new JLabel("<html> <h1 style=\"color: #3A3B3C; text-align: center; font-size: " + fontSize + "px; font-family: 'Montserrat', sans-serif\">" + question + "</h1> </html>");
-    JLabel back = new JLabel("<html> <h1 style=\"color: #3A3B3C; text-align: center; font-size: " + fontSize + "px; font-family: 'Montserrat', sans-serif\">" + answer + "</h1> </html>");
-
+    // Construct JLabels with the adjusted font size
+    JLabel front = new JLabel(styleText(question, fontSize));
+    JLabel back = new JLabel(styleText(answer, fontSize));
 
     // Surround the JLabel with a rectangle border
     this.setBorder(
@@ -82,14 +75,14 @@ public class CardGUI extends JPanel {
     this.setSize(200, 200);
 
     // Set the background color of the card
-    this.setBackground(new Color(251, 251, 255)); // color adjustments
+    this.setBackground(new Color(250, 250, 255));
 
     // Set the font of the JLabel
     front.setFont(Screen.medium_font.deriveFont(23.0f));
     back.setFont(Screen.medium_font.deriveFont(23.0f));
 
     // Make sure this panel has margins
-    this.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
+    this.setBorder(BorderFactory.createEmptyBorder(10, 40, 10, 40));
 
     // Draw the JLabel in the center of the rectangle
     front.setHorizontalAlignment(JLabel.CENTER);
@@ -105,6 +98,44 @@ public class CardGUI extends JPanel {
 
     this.add(front, "front");
     this.add(back, "back");
+  }
+
+  /**
+   * Maps a value from one range to another.
+   * @param value The value to map.
+   * @param start1 The start of the first range.
+   * @param stop1 The end of the first range.
+   * @param start2 The start of the second range.
+   * @param stop2 The end of the second range.
+   * @return The mapped value.
+   */
+  private double map(double value, double start1, double stop1, double start2, double stop2) {
+    if (value <= start1) {
+      return start2;
+    } else if (value >= stop1) {
+      return stop2;
+    }
+
+    return start2 + (stop2 - start2) * ((value - start1) / (stop1 - start1));
+  }
+
+  /**
+   * Styles a string in HTML tags.
+   * @param text The text to style.
+   * @param fontSize The font size of the text.
+   * @return The styled text.
+   */
+  private String styleText(String text, int fontSize) {
+    return (
+      "<html>" +
+        "<body>" +
+          "<div style='text-align: center; font-family: \"Courier New\", \"Lucida Console\", monospace;" 
+            + " font-size: " + fontSize + "px; line-height: 0.85'>" 
+              + text +
+          "</div>" +
+        "</body>" +
+      "</html>"
+    );
   }
 
   /**
