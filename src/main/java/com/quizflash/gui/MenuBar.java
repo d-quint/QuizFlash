@@ -1,5 +1,7 @@
 package com.quizflash.gui;
 
+import java.awt.Color;
+
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
@@ -120,6 +122,17 @@ public class MenuBar extends JMenuBar {
       try {
         UIManager.setLookAndFeel(new FlatSolarizedLightIJTheme());
         SwingUtilities.updateComponentTreeUI(this.getParent());
+
+        Color gridColor = Color.decode("#818181");
+        Color selectColor = Color.decode("#b3b3b3");
+        Color textColor = Color.decode("#000000");
+        
+        if (EditSet.getTable() != null) {
+          EditSet.getTable().setShowGrid(true);
+          EditSet.getTable().setGridColor(gridColor);
+          EditSet.getTable().setSelectionBackground(selectColor);
+          EditSet.getTable().setSelectionForeground(textColor);
+        }
       } catch (Exception ex) {
         ex.printStackTrace();
       }
@@ -131,6 +144,17 @@ public class MenuBar extends JMenuBar {
       try {
         UIManager.setLookAndFeel(new FlatMaterialDesignDarkIJTheme());
         SwingUtilities.updateComponentTreeUI(this.getParent());
+
+        Color gridColor = Color.decode("#818181");
+        Color selectColor = Color.decode("#b3b3b3");
+        Color textColor = Color.decode("#000000");
+        
+        if (EditSet.getTable() != null) {
+          EditSet.getTable().setShowGrid(true);
+          EditSet.getTable().setGridColor(gridColor);
+          EditSet.getTable().setSelectionBackground(selectColor);
+          EditSet.getTable().setSelectionForeground(textColor);
+        }
       } catch (Exception ex) {
         ex.printStackTrace();
       }

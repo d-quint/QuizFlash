@@ -15,6 +15,8 @@ import com.quizflash.logic.Card;
 import com.quizflash.logic.CardSet;
 import com.quizflash.logic.SetHandler;
 
+import java.awt.Color;
+
 /**
  * A designated user interface to edit the current set.
  */
@@ -31,7 +33,8 @@ public class EditSet extends JPanel {
 
   JSplitPane info_table_pane = new JSplitPane(JSplitPane.HORIZONTAL_SPLIT);
 
-  JTable cards_table;
+  private static JTable cards_table;
+  
   DefaultTableModel cards_table_model;
   JScrollPane cards_table_pane;
   JScrollPane description_pane;
@@ -263,6 +266,17 @@ public class EditSet extends JPanel {
     cards_table = new JTable(cards_table_model);
     cards_table_pane = new JScrollPane(cards_table);
 
+    // Set the grid lines to be visible and change the grid color
+    cards_table.setShowGrid(true);
+
+    // Set the grid color to be a dark gray
+    Color gridColor = Color.decode("#818181");
+    Color selectColor = Color.decode("#b3b3b3");
+    Color textColor = Color.decode("#000000");
+    cards_table.setGridColor(gridColor);
+    cards_table.setSelectionBackground(selectColor);
+    cards_table.setSelectionForeground(textColor);
+
     // Add listeners to the table (check if a row is selected and edited, then get the new values and make a new card)
     cards_table.getModel().addTableModelListener(e -> {
       // If the card already exists, only edit it using the CardSet's editCard method
@@ -300,5 +314,12 @@ public class EditSet extends JPanel {
     this.setBorder(editset_border);
     this.add(center_panel, BorderLayout.CENTER);
     this.add(button_panel, BorderLayout.SOUTH);
+  }
+
+  /**
+   * Returns the cards table.
+   */
+  public static JTable getTable() {
+    return cards_table;
   }
 }

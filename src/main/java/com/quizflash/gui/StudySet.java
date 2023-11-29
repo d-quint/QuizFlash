@@ -21,15 +21,15 @@ public class StudySet extends JPanel {
   CardGUI card_gui;
 
   JButton[] buttons = {
-    new JButton("Don't Know This"),
-    new JButton("I Know This"),
+    new JButton("Got It Wrong"),
+    new JButton("Got It Right"),
     new JButton("Back")
   };
 
   // A panel containing the panels for the card and its two buttons
   JPanel card_panel;
-  JPanel dontknow_panel;
-  JPanel know_panel;
+  JPanel wrong_panel;
+  JPanel right_panel;
   JPanel card_container;
 
   // A panel containing the progress bar and the label for the remaining cards count and card set name
@@ -46,7 +46,7 @@ public class StudySet extends JPanel {
   JToggleButton flip_btn = new JToggleButton("Flip");
 
   // A toggle button that allows the user to randomize the order of the cards
-  JToggleButton randomize_btn = new JToggleButton("Randomize");
+  JToggleButton randomize_btn = new JToggleButton("Toggle Randomized Mode");
 
   /**
    * Constructs a new Edit Set screen.
@@ -193,19 +193,19 @@ public class StudySet extends JPanel {
     card_container.setLayout(new CardLayout());
     displayCard(SetHandler.getCurrentCard());
 
-    // Initializing the don't know panel
-    dontknow_panel = new JPanel();
-    dontknow_panel.setLayout(new GridLayout(1, 1));
-    dontknow_panel.add(buttons[0]);
+    // Initializing the "got it wrong" panel
+    wrong_panel = new JPanel();
+    wrong_panel.setLayout(new GridLayout(1, 1));
+    wrong_panel.add(buttons[0]);
 
-    // Initializing the know panel
-    know_panel = new JPanel();
-    know_panel.setLayout(new GridLayout(1, 1));
-    know_panel.add(buttons[1]);
+    // Initializing the "got it right" panel
+    right_panel = new JPanel();
+    right_panel.setLayout(new GridLayout(1, 1));
+    right_panel.add(buttons[1]);
 
     // Add action listeners to the buttons
 
-    // Don't Know This button
+    // Got It Wrong button
     buttons[0].addActionListener(e -> {
       Card current_card = SetHandler.getCurrentCard();
 
@@ -213,7 +213,7 @@ public class StudySet extends JPanel {
       displayCard(SetHandler.getNextCard());
     });
 
-    // I Know This button
+    // Got It Right button
     buttons[1].addActionListener(e -> {
       CardSet current_set = SetHandler.getCurrentSet();
       Card current_card = SetHandler.getCurrentCard();
@@ -250,8 +250,8 @@ public class StudySet extends JPanel {
     });
 
     card_panel.add(card_container, BorderLayout.CENTER);
-    card_panel.add(dontknow_panel, BorderLayout.WEST);
-    card_panel.add(know_panel, BorderLayout.EAST);
+    card_panel.add(wrong_panel, BorderLayout.WEST);
+    card_panel.add(right_panel, BorderLayout.EAST);
   }
 
   /**

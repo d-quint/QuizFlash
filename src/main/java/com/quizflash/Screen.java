@@ -65,6 +65,7 @@ public class Screen extends JFrame {
    * Initializes the "Developed by" bar at the bottom of the screen.
    */
   private void initDevelopedBy() {
+    Font small_font = new Font("Arial", Font.PLAIN, 9); //adjusted
     developed_by_panel.setLayout(new FlowLayout(FlowLayout.LEFT));
     developed_by = new JLabel("Developed by: The OOPa LOOMPAS (Moral, Paglinawan, Quintano, Sandhu)");
     developed_by.setAlignmentX(LEFT_ALIGNMENT);
