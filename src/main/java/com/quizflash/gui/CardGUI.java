@@ -46,8 +46,29 @@ public class CardGUI extends JPanel {
       return;
     }
 
-    JLabel front = new JLabel("<html> <h3 style=\"color: #3A3B3C; text-align: center\">" + card.getQuestion() + "</h1> </html>");
-    JLabel back = new JLabel("<html> <h3 style=\"color: #3A3B3C; text-align: center\">" + card.getAnswer() + "</h1> </html>");
+    //created font size auto adjustment for card
+    // Calculate the font size based on the length of the text
+    int defaultFontSize = 80;
+    int fontSize = defaultFontSize;
+
+    String question = card.getQuestion();
+    String answer = card.getAnswer();
+
+    int maxLength = Math.max(question.length(), answer.length());
+
+// Adjust the font size based on the length of the longer text
+    if (maxLength > 10 && maxLength <= 70) {
+      fontSize = (int) (defaultFontSize * 10.0 / maxLength);
+    }
+
+    else if (maxLength >70){
+      fontSize = 20;
+    }
+
+// Construct JLabels with the adjusted font size
+    JLabel front = new JLabel("<html> <h1 style=\"color: #3A3B3C; text-align: center; font-size: " + fontSize + "px; font-family: 'Montserrat', sans-serif\">" + question + "</h1> </html>");
+    JLabel back = new JLabel("<html> <h1 style=\"color: #3A3B3C; text-align: center; font-size: " + fontSize + "px; font-family: 'Montserrat', sans-serif\">" + answer + "</h1> </html>");
+
 
     // Surround the JLabel with a rectangle border
     this.setBorder(
@@ -61,7 +82,7 @@ public class CardGUI extends JPanel {
     this.setSize(200, 200);
 
     // Set the background color of the card
-    this.setBackground(new Color(255, 255, 255));
+    this.setBackground(new Color(251, 251, 255)); // color adjustments
 
     // Set the font of the JLabel
     front.setFont(Screen.medium_font.deriveFont(23.0f));

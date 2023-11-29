@@ -15,6 +15,8 @@ import com.quizflash.logic.Card;
 import com.quizflash.logic.CardSet;
 import com.quizflash.logic.SetHandler;
 
+import java.awt.Color;
+
 /**
  * A designated user interface to edit the current set.
  */
@@ -262,6 +264,15 @@ public class EditSet extends JPanel {
     cards_table_model = new DefaultTableModel(card_data, column_names);
     cards_table = new JTable(cards_table_model);
     cards_table_pane = new JScrollPane(cards_table);
+
+    // Set the grid lines to be visible and change the grid color
+    cards_table.setShowGrid(true);
+    cards_table.setShowVerticalLines(true);
+
+    // Set the grid color to #ED4915
+    Color gridColor = Color.decode("#818181"); //apply grid for question bank visibility
+    cards_table.setGridColor(gridColor);
+
 
     // Add listeners to the table (check if a row is selected and edited, then get the new values and make a new card)
     cards_table.getModel().addTableModelListener(e -> {
