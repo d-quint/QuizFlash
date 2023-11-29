@@ -11,11 +11,11 @@ import com.formdev.flatlaf.intellijthemes.FlatMaterialDesignDarkIJTheme;
 public class Main {
   public static void main(String[] args) {
     SwingUtilities.invokeLater(() -> {
-    try {
-      UIManager.setLookAndFeel(new FlatMaterialDesignDarkIJTheme());
-    } catch (Exception e) {
-      System.err.println("Failed to initialize LaF, using default.");
-    }
+      try {
+        UIManager.setLookAndFeel(new FlatMaterialDesignDarkIJTheme());
+      } catch (Exception e) {
+        System.err.println("Failed to initialize LaF, using default.");
+      }
 
       new Screen();
     });

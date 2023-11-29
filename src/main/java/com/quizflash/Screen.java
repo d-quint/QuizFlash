@@ -25,6 +25,7 @@ public class Screen extends JFrame {
   JLabel developed_by;
   JPanel developed_by_panel = new JPanel();
   MenuBar menu_bar = new MenuBar();
+  ImageIcon icon = new ImageIcon("src/main/resources/icon.png");
 
   public static Font font = new Font("Arial", 0, 16);
   public static Font medium_font = new Font("Arial", Font.BOLD, 15);
@@ -37,6 +38,8 @@ public class Screen extends JFrame {
    */
   public Screen() {
     super("QuizFlash - Your Digital Flashcard Manager");
+
+    this.setIconImage(icon.getImage());
 
     setUIFont(new FontUIResource(font));
     changeComponentFont(gui_screen, font);
