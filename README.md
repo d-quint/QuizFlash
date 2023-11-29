@@ -21,7 +21,7 @@ To access QuizFlash:
 - Ensure the latest JDK version is installed to prevent library issues or errors.
 - Questions and answers for the program are stored in *.txt* files, which serve as a database.
 - Provides various themes to accommodate user preferences.
-- Programmed using **Java** and **Swing** technology.
+- Programmed using **Java** and **JSwing**.
 
 ## Authors
 
