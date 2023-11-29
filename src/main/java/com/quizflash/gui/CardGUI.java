@@ -45,7 +45,7 @@ public class CardGUI extends JPanel {
     if (card == null) {
       return;
     }
-
+    //
     //created font size auto adjustment for card
     // Calculate the font size based on the length of the text
     int defaultFontSize = 80;
