@@ -8,7 +8,7 @@ QuizFlash is a robust digital flashcard manager designed to streamline and enric
 To access QuizFlash:
 - Check the available versions in the releases section.
 - Download the source code and extract the files.
-- Ensure `QuizFlash.jar` exists and run it by double-clicking the `Launch.bat` file to launch the program.
+- Ensure `QuizFlash.jar` exists and run it either by double-clicking it, or running the `Launch.bat` file to launch the program in debug mode (with console).
 
 ## Program Guide & Commands
 | PROGRAM MENUS    | DESCRIPTION                                       |
