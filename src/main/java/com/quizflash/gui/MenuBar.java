@@ -19,7 +19,7 @@ import com.quizflash.Screen;
 public class MenuBar extends JMenuBar {
   String[][] menu_items = {
     {"File", "New Set", "Load Set", "Save Set", "Save Set As", "Exit"},
-    {"Theme", "Light", "Dark", "Classic"}
+    {"Theme", "Light", "Dark", "Classic"}, {"Music", "On", "Off"}
   };
 
   /**
@@ -133,6 +133,10 @@ public class MenuBar extends JMenuBar {
           EditSet.getTable().setSelectionBackground(selectColor);
           EditSet.getTable().setSelectionForeground(textColor);
         }
+
+        getMenuItem("Theme", "Light").setEnabled(false);
+        getMenuItem("Theme", "Dark").setEnabled(true);
+        getMenuItem("Theme", "Classic").setEnabled(true);
       } catch (Exception ex) {
         ex.printStackTrace();
       }
@@ -155,6 +159,10 @@ public class MenuBar extends JMenuBar {
           EditSet.getTable().setSelectionBackground(selectColor);
           EditSet.getTable().setSelectionForeground(textColor);
         }
+
+        getMenuItem("Theme", "Light").setEnabled(true);
+        getMenuItem("Theme", "Dark").setEnabled(false);
+        getMenuItem("Theme", "Classic").setEnabled(true);
       } catch (Exception ex) {
         ex.printStackTrace();
       }
@@ -171,12 +179,32 @@ public class MenuBar extends JMenuBar {
             break;
           }
         }
+
+        getMenuItem("Theme", "Light").setEnabled(true);
+        getMenuItem("Theme", "Dark").setEnabled(true);
+        getMenuItem("Theme", "Classic").setEnabled(false);
       } catch (Exception ex) {
         // If Metal is not available, you can set the GUI to another look and feel (Light).
         JOptionPane.showMessageDialog(
           null, "Classic (Metal) theme is not available. Using Flat Light theme instead.", "ERROR", JOptionPane.ERROR_MESSAGE);
         getMenuItem("Theme", "Light").doClick();
       }
+    });
+
+    // Music > On
+    getMenuItem("Music", "On").setEnabled(false);
+
+    getMenuItem("Music", "On").addActionListener(e -> {
+      Screen.muteMusic(false);
+      getMenuItem("Music", "On").setEnabled(false);
+      getMenuItem("Music", "Off").setEnabled(true);
+    });
+
+    // Music > Off
+    getMenuItem("Music", "Off").addActionListener(e -> {
+      Screen.muteMusic(true);
+      getMenuItem("Music", "On").setEnabled(true);
+      getMenuItem("Music", "Off").setEnabled(false);
     });
   }
 }

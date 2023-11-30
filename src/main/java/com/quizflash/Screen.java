@@ -10,6 +10,7 @@ import java.util.Enumeration;
 
 import javax.swing.*;
 import javax.swing.plaf.FontUIResource;
+import javax.sound.sampled.*;
 
 import com.quizflash.gui.GUIScreen;
 import com.quizflash.gui.MenuBar;
@@ -20,6 +21,7 @@ import com.quizflash.logic.SetHandler;
  * The main screen of the application.
  * It has two child screens: {@link com.quizflash.GUIScreen} and {@link com.quizflash.gui.MenuBar}.
  * The menu bar is at the top of the screen, and the GUI screen is below it.
+ * It also has a label at the bottom detailing the developers.
  */
 public class Screen extends JFrame {
   JLabel developed_by;
@@ -56,6 +58,8 @@ public class Screen extends JFrame {
     this.setSize(1100, 700);
 
     menu_bar.getMenuItem("Theme", "Light").doClick();
+
+    Screen.playMusic("bgm.wav", true);
 
     setLocationRelativeTo(null);
     setVisible(true);
@@ -226,5 +230,58 @@ public class Screen extends JFrame {
     Screen.getGUIScreen().updatePanels("Edit Current Set");
 
     return true;
+  }
+
+  // Handling background music
+
+  private static Clip audio;
+  private static String current_audio = "";
+  private static boolean is_muted = false;
+
+  public static void playMusic(String filename, boolean shouldLoop) {
+    if (current_audio.equals(filename) || is_muted) {
+      return;
+    }
+
+    stopMusic();
+
+    try {
+      File audioFile = new File("./src/main/resources/" + filename); 
+      AudioInputStream audioStream = AudioSystem.getAudioInputStream(audioFile);
+
+      audio = AudioSystem.getClip();
+      audio.open(audioStream);
+      
+      if (shouldLoop) {
+        audio.loop(Clip.LOOP_CONTINUOUSLY);
+      }
+
+      audio.start();
+
+      current_audio = filename;
+    } catch (Exception ex) {
+      JOptionPane.showMessageDialog(
+        null, "An error occurred in playing the audio file: " + filename, "ERROR", JOptionPane.ERROR_MESSAGE);
+      ex.printStackTrace();
+    }
+  }
+
+  public static void stopMusic() {
+    if (audio != null && audio.isRunning()) {
+      audio.stop();
+      audio.close();
+
+      current_audio = "";
+    }
+  }
+
+  public static void muteMusic(boolean shouldMute) {
+    is_muted = shouldMute;
+
+    if (is_muted) {
+      stopMusic();
+    } else {
+      playMusic("bgm.wav", true);
+    }
   }
 }
