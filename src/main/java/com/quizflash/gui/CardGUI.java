@@ -130,7 +130,7 @@ public class CardGUI extends JPanel {
       "<html>" +
         "<body>" +
           "<div style='text-align: center; font-family: \"Courier New\", \"Lucida Console\", monospace;" 
-            + " font-size: " + fontSize + "px;'>" 
+            + " font-size: " + fontSize + "px; color: #5A5A5A;'>"
               + text +
           "</div>" +
         "</body>" +

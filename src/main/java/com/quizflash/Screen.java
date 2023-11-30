@@ -16,6 +16,9 @@ import com.quizflash.gui.MenuBar;
 import com.quizflash.logic.CardSet;
 import com.quizflash.logic.SetHandler;
 
+
+//new
+import javax.sound.sampled.*;
 /**
  * The main screen of the application.
  * It has two child screens: {@link com.quizflash.GUIScreen} and {@link com.quizflash.gui.MenuBar}.
@@ -56,6 +59,8 @@ public class Screen extends JFrame {
     this.setSize(1100, 700);
 
     menu_bar.getMenuItem("Theme", "Light").doClick();
+
+    Screen.playMusic(); // Call playMusic() to start the music automatically
 
     setLocationRelativeTo(null);
     setVisible(true);
@@ -226,5 +231,34 @@ public class Screen extends JFrame {
     Screen.getGUIScreen().updatePanels("Edit Current Set");
 
     return true;
+  }
+
+  // Handling background music
+
+  private static Clip clip;
+
+  public static void playMusic() {
+    if (clip != null && clip.isRunning()) {
+      return;
+    }
+
+    try {
+      File audioFile = new File("src/main/resources/kahoot.wav"); // Replace with your audio file path
+      AudioInputStream audioStream = AudioSystem.getAudioInputStream(audioFile);
+
+      clip = AudioSystem.getClip();
+      clip.open(audioStream);
+      clip.loop(Clip.LOOP_CONTINUOUSLY);
+      clip.start();
+    } catch (Exception ex) {
+      ex.printStackTrace();
+    }
+  }
+
+  public static void stopMusic() {
+    if (clip != null && clip.isRunning()) {
+      clip.stop();
+      clip.close();
+    }
   }
 }

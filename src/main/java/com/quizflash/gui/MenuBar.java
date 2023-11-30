@@ -19,7 +19,7 @@ import com.quizflash.Screen;
 public class MenuBar extends JMenuBar {
   String[][] menu_items = {
     {"File", "New Set", "Load Set", "Save Set", "Save Set As", "Exit"},
-    {"Theme", "Light", "Dark", "Classic"}
+    {"Theme", "Light", "Dark", "Classic"}, {"Music", "On", "Off"}
   };
 
   /**
@@ -177,6 +177,16 @@ public class MenuBar extends JMenuBar {
           null, "Classic (Metal) theme is not available. Using Flat Light theme instead.", "ERROR", JOptionPane.ERROR_MESSAGE);
         getMenuItem("Theme", "Light").doClick();
       }
+    });
+
+    // Music > On
+    getMenuItem("Music", "On").addActionListener(e -> {
+      Screen.playMusic();
+    });
+
+    // Music > Off
+    getMenuItem("Music", "Off").addActionListener(e -> {
+      Screen.stopMusic();
     });
   }
 }
