@@ -229,8 +229,12 @@ public class StudySet extends JPanel {
 
       // Check if the set is finished
       if (SetHandler.getCurrentSet().getUnknownCardCount() == 0) {
+        Screen.playMusic("finish_music.wav", false);
+        
         JOptionPane.showMessageDialog(null, "You have finished studying this set!", "SUCCESS", JOptionPane.INFORMATION_MESSAGE);
         Screen.getGUIScreen().switchTo("Main Menu");
+
+        Screen.playMusic("bgm.wav", true);
 
         // Reset the card set and the progress bar
         SetHandler.setCurrentCardIndex(0);

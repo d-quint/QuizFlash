@@ -133,6 +133,10 @@ public class MenuBar extends JMenuBar {
           EditSet.getTable().setSelectionBackground(selectColor);
           EditSet.getTable().setSelectionForeground(textColor);
         }
+
+        getMenuItem("Theme", "Light").setEnabled(false);
+        getMenuItem("Theme", "Dark").setEnabled(true);
+        getMenuItem("Theme", "Classic").setEnabled(true);
       } catch (Exception ex) {
         ex.printStackTrace();
       }
@@ -155,6 +159,10 @@ public class MenuBar extends JMenuBar {
           EditSet.getTable().setSelectionBackground(selectColor);
           EditSet.getTable().setSelectionForeground(textColor);
         }
+
+        getMenuItem("Theme", "Light").setEnabled(true);
+        getMenuItem("Theme", "Dark").setEnabled(false);
+        getMenuItem("Theme", "Classic").setEnabled(true);
       } catch (Exception ex) {
         ex.printStackTrace();
       }
@@ -171,6 +179,10 @@ public class MenuBar extends JMenuBar {
             break;
           }
         }
+
+        getMenuItem("Theme", "Light").setEnabled(true);
+        getMenuItem("Theme", "Dark").setEnabled(true);
+        getMenuItem("Theme", "Classic").setEnabled(false);
       } catch (Exception ex) {
         // If Metal is not available, you can set the GUI to another look and feel (Light).
         JOptionPane.showMessageDialog(
@@ -180,13 +192,19 @@ public class MenuBar extends JMenuBar {
     });
 
     // Music > On
+    getMenuItem("Music", "On").setEnabled(false);
+
     getMenuItem("Music", "On").addActionListener(e -> {
-      Screen.playMusic();
+      Screen.muteMusic(false);
+      getMenuItem("Music", "On").setEnabled(false);
+      getMenuItem("Music", "Off").setEnabled(true);
     });
 
     // Music > Off
     getMenuItem("Music", "Off").addActionListener(e -> {
-      Screen.stopMusic();
+      Screen.muteMusic(true);
+      getMenuItem("Music", "On").setEnabled(true);
+      getMenuItem("Music", "Off").setEnabled(false);
     });
   }
 }
